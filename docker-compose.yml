@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  training:
+    build: ./training
+    ports:
+      - '8500:8500'
+    volumes:
+      - ./training:/app
+  ui:
+    build: ./ui
+    ports:
+      - '8501:8501'
+    depends_on:
+      - training
+    volumes:
+      - ./ui:/app
+
+networks:
+  my_network:
+    driver: bridge
